@@ -1,0 +1,36 @@
+version: "3"
+services:
+  book-api:
+    build: .
+    container_name: book-api
+    restart: always
+    ports:
+      - 8080:8080
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    restart: on-failure
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo-data:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
+  mongo-express:
+    image: mongo-express
+    container_name: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=root
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=root
+      - ME_CONFIG_MONGODB_SERVER=mongodb
+volumes:
+  mongo-data:
+    driver: local
+
+networks:
+  default:
+    name: mongo_network

@@ -17,8 +17,11 @@ import com.javatechie.spring.mongo.api.repository.BookRepository;
 @RestController
 public class BookController {
 
-	@Autowired
-	private BookRepository repository;
+	private final BookRepository repository;
+
+	public BookController(BookRepository repository) {
+		this.repository = repository;
+	}
 
 	@PostMapping("/addBook")
 	public String saveBook(@RequestBody Book book) {

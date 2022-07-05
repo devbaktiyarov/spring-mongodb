@@ -11,10 +11,10 @@ import lombok.ToString;
 @Setter
 @ToString
 
-@Document(collection = "Book")
+@Document(collection = "books")
 public class Book {
 	@Id
-	private int id;
+	private String id;
 	private String bookName;
 	private String authorName;
 }
